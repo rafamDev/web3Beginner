@@ -18,7 +18,7 @@ contract MyTasksContract {
     //Key -> uint256 , Value -> object Task / public List of tasks called "tasks".
     mapping (uint256 => Task) public tasks;
 
-    //"memory" is a key word which indicates a temporarily use of variable (local variable), only when de function is called. 
+    //"memory" is a key word which indicates a temporarily use of variable (local variable), only when the function is called. 
     //Access modifier is needed.
     function createTask(string memory _title, string memory _description) public {
        tasks[taskCounter] = Task(taskCounter, _title, _description, false, block.timestamp);
