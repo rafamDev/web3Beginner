@@ -19,6 +19,9 @@ contract MyTasksContract {
         uint createdAt
     );
 
+    //Event that is made when the task is done.
+    event TaskDone(uint id, bool done);
+
     //Variables declared.
     struct Task {
         uint256 id;
@@ -49,6 +52,7 @@ contract MyTasksContract {
         }*/
         _localTask.done = !_localTask.done;
         tasks[_id] = _localTask; 
+        emit TaskDone(_id, _localTask.done);
     }
 
 }

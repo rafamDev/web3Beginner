@@ -36,7 +36,7 @@ contract("myTasksContractTest", () => {
     it("task created successfully ", async () => {
         const taskResult = await this.myTasksContract.createTask("Task 2", "example 2");
           //Second task created.
-          const taskEvent = await taskResult.logs[0].args;
+          const taskEvent = taskResult.logs[0].args;
         
         const taskCounter = await this.myTasksContract.taskCounter(); // i = 2  
          assert.equal(taskEvent.id.toNumber(), taskCounter);
@@ -44,6 +44,16 @@ contract("myTasksContractTest", () => {
          assert.equal(taskEvent.description, "example 2");
          assert.equal(taskEvent.done, false);
          assert.equal(taskCounter, 2);
+    })
+
+    //Smart contract has tasks done. 
+    it("task done successfully ", async () => {
+      const taskDone = await this.myTasksContract.taskDone(1);
+      const taskEvent = taskDone.logs[0].args;
+      const task = await this.myTasksContract.tasks(1);
+       assert.equal(task.done, true);
+       assert.equal(taskEvent.done, true);
+       assert.equal(taskEvent.id, 1);
     })
 
 })
